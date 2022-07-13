@@ -1,6 +1,7 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 public class report {
-    public static void main(String[] args) {
+    public void main(String[] args) {
         System.out.println("Вас приветствует программа бухгалтерской отчетности!");
         printMenu();
         Scanner scanner = new Scanner(System.in);
@@ -16,7 +17,7 @@ public class report {
                 // вызов метода сверки отчетов
             }
             else if (userInput == 4){
-                MonthlyReport.printMonthReport();// вызов метода печати информации из класса месячных очетов
+                // вызов метода печати информации из класса месячных очетов
             }
             else if (userInput == 5){
                 // вызов метода печати информации из класса годового отчета
@@ -29,7 +30,7 @@ public class report {
             }
         }
     }
-     static void printMenu(){
+     public void printMenu(){
         System.out.println("Выберите нужный пункт меню:");
         System.out.println("1 - Считать все месячные отчёты");
         System.out.println("2 - Считать годовой отчёт");

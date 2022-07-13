@@ -22,6 +22,7 @@ public class YearlyReport {
         }
     }
 
+
     public int maxExpence(){
         int max = 0;
         for (YRecord row : rows) {
