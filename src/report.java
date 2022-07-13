@@ -1,19 +1,19 @@
 import java.util.Scanner;
-public class Main {
-    public void main(String[] args) {
+public class report {
+    public static void main(String[] args) {
         System.out.println("Вас приветствует программа бухгалтерской отчетности!");
         printMenu();
         Scanner scanner = new Scanner(System.in);
         int userInput = scanner.nextInt();
         while(true) {
             if (userInput == 1){
-                MonthlyReport.addExpense();// вызов метода считывания месячного отчета из класса месячных отчетов
+                // вызов метода считывания месячного отчета из класса месячных отчетов
             }
             else if (userInput == 2){
-                //вызов метода считывания годового отчета из класса годовых отчетов
+                YearlyReport yreport = new YearlyReport(2021, "resources/y.2021.csv");//вызов метода считывания годового отчета из класса годовых отчетов
             }
             else if (userInput == 3){
-                // вызов методаи сверки отчетов
+                // вызов метода сверки отчетов
             }
             else if (userInput == 4){
                 MonthlyReport.printMonthReport();// вызов метода печати информации из класса месячных очетов

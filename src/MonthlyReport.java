@@ -1,4 +1,7 @@
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ public class MonthlyReport {
                             ", стоимость "+ MonthExpense.sum_of_one);
         }
     }
+
    static void addExpense(){
         System.out.println("name the expense");
         Scanner scanner = new Scanner(System.in);
