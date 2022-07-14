@@ -86,6 +86,32 @@ public class YearlyReport {
             return average;
         }
 
+        public int sumExpence(){
+        int sum = 0;
+            for (YRecord row : rows) {
+                 if(row.isExpense){
+                    sum += row.ammount;
+                        }
+                     }
+             }
+        return sum;
+    }
+    
+        public int sumIncome(){
+        int sum = 0;
+            for (YRecord row : rows) {
+                 if(!row.isExpense){
+                    sum += row.ammount;
+                        }
+                     }
+             }
+        return sum;
+    }
+
+
+
+
+
     private String readFileContentsOrNull(String path)
     {
         try {
