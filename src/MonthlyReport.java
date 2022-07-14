@@ -1,43 +1,117 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.SQLOutput;
-import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class MonthlyReport {
-    static HashMap<Integer, MonthExpense> monthExpenses = new HashMap<>();
-    static Integer expNumber = 1;
-
-
-    static void printMonthReport(){
-        for (Integer expNumber : monthExpenses.keySet()){
-            System.out.println(
-                    "Затрата № " + expNumber +
-                            ", Название "+ MonthExpense.item_name+
-                            ", затрата "+ MonthExpense.is_expense+
-                            ", кол-во "+ MonthExpense.quantity+
-                            ", стоимость "+ MonthExpense.sum_of_one);
+public class MonthlyReportNew {
+  int month;
+  ArrayList<MRecord> rows = new ArrayList<>();
+  
+  public MonthlyReportNew(int month, String path){
+    this.month = month;
+    String content = readFileContentsOrNull(path);
+    String[] lines = content.split("\r?\n");
+    for(int i = 1; i < lines.length; i++){
+      String line = lines[i];
+      String[] parts = line.split(",");
+      String itemName = parts[0];
+      boolean isExpense = Boolean.parseBoolean(parts[1]);
+      int quantity = Integer.parseInt(parts[2]);
+      int sumOfOne = Integer.parseInt(parts[3]);
+      MRecord record = new MRecord(itemName, isExpense, quantity, sumOfOne);
+      rows.add(record);
+      }      
+    }
+    
+    private String readFileContentsOrNull(String path)
+    {
+        try {
+            return Files.readString(Path.of(path));
+        } catch (IOException e) {
+            System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно, файл не находится в нужной директории.");
+            return null;
         }
     }
+  
+      public int sumExpence(){
+        int sum = 0;
+        for (MRecord row : rows) {
+            if(row.isExpense){
+             sum += row.quantity * row.sumOfOne;   
+                }
+            }
+          return sum;
+        }
 
-   static void addExpense(){
-        System.out.println("name the expense");
-        Scanner scanner = new Scanner(System.in);
-        String item_name = scanner.nextLine();
-        System.out.println("is it expense ?");
-        Boolean is_expense = scanner.hasNextBoolean();
-        System.out.println("enter quantity");
-        Integer quantity = scanner.nextInt();
-        System.out.println("enter sum of one");
-        Integer sum_of_one = scanner.nextInt();
 
-        MonthExpense first = new MonthExpense(item_name, is_expense, quantity, sum_of_one);
-        monthExpenses.put(expNumber, first);
-        expNumber++;
+  
+      public int sumIncome(){
+        int sum = 0;
+        for (MRecord row : rows) {
+            if(!row.isExpense){
+             sum += row.quantity * row.sumOfOne;   
+                }
+            }
+
+        return sum;
     }
 
 
+
+    public int maxIncome(){
+        int max = 0;
+        for (MRecord row : rows) {
+            if(!row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                }
+            }
+        }
+        return max;
+    }
+
+    public String maxIncomeItem(){
+        int max = 0;
+        String item = null;
+        for (MRecord row : rows) {
+            if(!row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                    item = row.itemName;
+                }
+            }
+        }
+        return item;
+    }
+
+
+
+
+    public int maxExpence(){
+        int max = 0;
+        for (MRecord row : rows) {
+            if(row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                }
+            }
+        }
+        return max;
+    }
+
+    public String maxExpenceItem(){
+        int max = 0;
+        String item = null;
+        for (MRecord row : rows) {
+            if(row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                    item = row.itemName;
+                }
+            }
+        }
+        return item;
+    }
+
 }
+
