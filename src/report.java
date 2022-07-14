@@ -18,6 +18,33 @@ public class report {
                     //вызов метода считывания годового отчета из класса годовых отчетов
             }
             else if (userInput == 3){
+                int incomeOne = mreportOne.sumIncome();
+                int expenseOne = mreportOne.sumExpence();
+                
+                int incomeTwo = mreportTwo.sumIncome();
+                int expenseTwo = mreportTwo.sumExpence();
+                
+                int incomeThree = mreportThree.sumIncome();
+                int expenseThree = mreportThree.sumExpence();
+                
+                int msumIncome = incomeOne + incomeTwo + incomeThree;
+                int msumExpense = expenseOne + expenseTwo + expenseThree;
+                
+                if (yreport.sumExpence() == msumExpense){
+                    System.out.println("Проверка по расходам пройдена")
+                }
+                else {
+                     System.out.println("Проверка по расходам НЕ пройдена")
+                }
+                
+                if (yreport.sumIncome() == msumIncome){
+                    System.out.println("Проверка по приходам пройдена")
+                }
+                else {
+                     System.out.println("Проверка по приходам НЕ пройдена")
+                }                
+                
+                
                 // вызов метода сверки отчетов
             }
             else if (userInput == 4){
