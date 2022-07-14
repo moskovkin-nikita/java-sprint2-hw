@@ -34,6 +34,68 @@ public class YearlyReport {
         }
         return max;
     }
+    
+        public int sumExpenceInMonth(int month){
+        int sum = 0;
+            for (YRecord row : rows) {
+                if(row.month == month){
+                     if(row.isExpense){
+                         sum += row.ammount;
+                        }
+                     }
+                 }
+             }
+        return sum;
+    }
+    
+        public int sumIncomeInMonth(int month){
+        int sum = 0;
+            for (YRecord row : rows) {
+                if(row.month == month){
+                     if(!row.isExpense){
+                         sum += row.ammount;
+                        }
+                     }
+                 }
+             }
+        return sum;
+    }
+    
+        public int averageExpence(){
+            int sum = 0;
+            int rowNumber = 0;
+            for (YRecord row : rows) {
+                 if(row.isExpense){
+                     sum += row.ammount;
+                     rowNumber++;
+                 }
+            }           
+            int average = sum / rowNumber;
+            return average;
+        }
+            
+        public int averageIncome(){
+            int sum = 0;
+            int rowNumber = 0;
+            for (YRecord row : rows) {
+                 if(!row.isExpense){
+                     sum += row.ammount;
+                     rowNumber++;
+                }    
+            }
+            int average = sum / rowNumber;
+            return average;
+        }
+
+
+        public void printYReport {
+        for (YRecord row : rows){
+            System.out.println("Месяц: "+ row.month + ", движение средств: " + row.ammount + ", д/к: " + row.isExpense);        
+        }
+        
+        }
+
+
     private String readFileContentsOrNull(String path)
     {
         try {
