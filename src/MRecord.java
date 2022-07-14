@@ -1,11 +1,11 @@
 public class MRecord {
-    String item_name;
+    String itemName;
     boolean isExpense;
     int quantity;
     int sumOfOne;
 
-    public YRecord(String item_name, boolean isExpense, int quantity,  int sumOfOne) {
-        this.item_name = item_name;
+    public YRecord(String itemName, boolean isExpense, int quantity,  int sumOfOne) {
+        this.itemName = itemName;
         this.isExpense = isExpense;
         this.quantity = quantity;
         this.sumOfOne = sumOfOne;
