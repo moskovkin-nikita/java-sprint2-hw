@@ -21,9 +21,30 @@ public class report {
                 // вызов метода сверки отчетов
             }
             else if (userInput == 4){
+                System.out.println("Название месяца: " + mreportOne.month);
+                System.out.println("Самая большая трата: " + mreportOne.maxIncome() + ", " + mreportOne.maxIncomeItem());
+                System.out.println("Самая большая трата: " + mreportOne.maxExpence() + ", " + mreportOne.maxExpenceItem());
+                println();
+                System.out.println("Название месяца: " + mreportTwo.month);
+                System.out.println("Самая большая трата: " + mreportTwo.maxIncome() + ", " + mreportTwo.maxIncomeItem());
+                System.out.println("Самая большая трата: " + mreportTwo.maxExpence() + ", " + mreportTwo.maxExpenceItem());
+                println();
+                System.out.println("Название месяца: " + mreportThree.month);
+                System.out.println("Самая большая трата: " + mreportThree.maxIncome() + ", " + mreportThree.maxIncomeItem());
+                System.out.println("Самая большая трата: " + mreportThree.maxExpence() + ", " + mreportThree.maxExpenceItem());               
+                
                 // вызов метода печати информации из класса месячных очетов
             }
             else if (userInput == 5){
+                System.out.println("Рассматриваемый год: " + yreport.year);
+                
+                System.out.println("Прибыль по месяцам: " + (yreport.sumIncomeInMonth(0) - yreport.sumExpenceInMonth(0)));
+                System.out.println("Прибыль по месяцам: " + (yreport.sumIncomeInMonth(1) - yreport.sumExpenceInMonth(1)));
+                System.out.println("Прибыль по месяцам: " + (yreport.sumIncomeInMonth(2) - yreport.sumExpenceInMonth(2)));                
+                
+                System.out.println("Средний расход за все месяцы в году: " + yreport.averageExpence());
+                System.out.println("Средний доход за все месяцы в году: " + yreport.averageIncome());                
+                                
                 // вызов метода печати информации из класса годового отчета
             }
             else if (userInput == 123){
