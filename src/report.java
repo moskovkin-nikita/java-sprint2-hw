@@ -8,10 +8,14 @@ public class report {
         int userInput = scanner.nextInt();
         while(true) {
             if (userInput == 1){
-                // вызов метода считывания месячного отчета из класса месячных отчетов
+               MonthlyReportNew mreportOne = new MonthlyReportNew(01, "resources/m.202101.csv"); 
+               MonthlyReportNew mreportTwo = new MonthlyReportNew(02, "resources/m.202102.csv");
+               MonthlyReportNew mreportThree = new MonthlyReportNew(03, "resources/m.202103.csv");
+                // вызов метода считывания месячных отчетов
             }
             else if (userInput == 2){
-                YearlyReport yreport = new YearlyReport(2021, "resources/y.2021.csv");//вызов метода считывания годового отчета из класса годовых отчетов
+                YearlyReport yreport = new YearlyReport(2021, "resources/y.2021.csv");
+                    //вызов метода считывания годового отчета из класса годовых отчетов
             }
             else if (userInput == 3){
                 // вызов метода сверки отчетов
