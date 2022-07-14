@@ -22,96 +22,6 @@ public class YearlyReport {
         }
     }
 
-    public int maxExpence(){
-        int max = 0;
-        for (YRecord row : rows) {
-            if(row.isExpense){
-                if (row.ammount > max){
-                    max = row.ammount;
-                }
-            }
-        }
-        return max;
-    }
-    
-        public int sumExpenceInMonth(int month){
-        int sum = 0;
-            for (YRecord row : rows) {
-                if(row.month == month){
-                     if(row.isExpense){
-                         sum += row.ammount;
-                        }
-                     }
-                 }
-             }
-        return sum;
-    }
-    
-        public int sumIncomeInMonth(int month){
-        int sum = 0;
-            for (YRecord row : rows) {
-                if(row.month == month){
-                     if(!row.isExpense){
-                         sum += row.ammount;
-                        }
-                     }
-                 }
-             }
-        return sum;
-    }
-    
-        public int averageExpence(){
-            int sum = 0;
-            int rowNumber = 0;
-            for (YRecord row : rows) {
-                 if(row.isExpense){
-                     sum += row.ammount;
-                     rowNumber++;
-                 }
-            }           
-            int average = sum / rowNumber;
-            return average;
-        }
-            
-        public int averageIncome(){
-            int sum = 0;
-            int rowNumber = 0;
-            for (YRecord row : rows) {
-                 if(!row.isExpense){
-                     sum += row.ammount;
-                     rowNumber++;
-                }    
-            }
-            int average = sum / rowNumber;
-            return average;
-        }
-
-        public int sumExpence(){
-        int sum = 0;
-            for (YRecord row : rows) {
-                 if(row.isExpense){
-                    sum += row.ammount;
-                        }
-                     }
-             }
-        return sum;
-    }
-    
-        public int sumIncome(){
-        int sum = 0;
-            for (YRecord row : rows) {
-                 if(!row.isExpense){
-                    sum += row.ammount;
-                        }
-                     }
-             }
-        return sum;
-    }
-
-
-
-
-
     private String readFileContentsOrNull(String path)
     {
         try {
@@ -122,4 +32,51 @@ public class YearlyReport {
         }
     }
 
+    public int sumExpenseInMonth(int month){
+        int sum = 0;
+        for (YRecord row : rows) {
+            if(row.month == (month + 1)){
+                if(row.isExpense){
+                    sum += row.ammount;
+                }
+            }
+        }
+        return sum;
+    }
+
+    public int sumIncomeInMonth(int month){
+        int sum = 0;
+        for (YRecord row : rows) {
+            if(row.month == (month + 1)){
+                if(!row.isExpense){
+                    sum += row.ammount;
+                }
+            }
+        }
+        return sum;
+    }
+
+    public int averageExpense(){
+        int sum = 0;
+        int rowNumber = 0;
+        for (YRecord row : rows) {
+            if(row.isExpense){
+                sum += row.ammount;
+                rowNumber++;
+            }
+        }
+        return sum / rowNumber;
+    }
+            
+    public int averageIncome(){
+        int sum = 0;
+        int rowNumber = 0;
+        for (YRecord row : rows) {
+            if(!row.isExpense){
+                sum += row.ammount;
+                rowNumber++;
+            }
+        }
+        return sum / rowNumber;
+    }
 }

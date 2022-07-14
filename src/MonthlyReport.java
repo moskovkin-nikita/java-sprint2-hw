@@ -3,11 +3,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class MonthlyReportNew {
+public class MonthlyReport {
   int month;
   ArrayList<MRecord> rows = new ArrayList<>();
   
-  public MonthlyReportNew(int month, String path){
+  public MonthlyReport(int month, String path){
     this.month = month;
     String content = readFileContentsOrNull(path);
     String[] lines = content.split("\r?\n");

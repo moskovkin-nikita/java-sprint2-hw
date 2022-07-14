@@ -1,88 +1,86 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 public class report {
-    public void main(String[] args) {
-        System.out.println("Вас приветствует программа бухгалтерской отчетности!");
-        printMenu();
-        Scanner scanner = new Scanner(System.in);
-        int userInput = scanner.nextInt();
-        while(true) {
-            if (userInput == 1){
-               MonthlyReportNew mreportOne = new MonthlyReportNew(01, "resources/m.202101.csv"); 
-               MonthlyReportNew mreportTwo = new MonthlyReportNew(02, "resources/m.202102.csv");
-               MonthlyReportNew mreportThree = new MonthlyReportNew(03, "resources/m.202103.csv");
-                // вызов метода считывания месячных отчетов
-            }
-            else if (userInput == 2){
-                YearlyReport yreport = new YearlyReport(2021, "resources/y.2021.csv");
-                    //вызов метода считывания годового отчета из класса годовых отчетов
-            }
-            else if (userInput == 3){
-                int incomeOne = mreportOne.sumIncome();
-                int expenseOne = mreportOne.sumExpence();
-                
-                int incomeTwo = mreportTwo.sumIncome();
-                int expenseTwo = mreportTwo.sumExpence();
-                
-                int incomeThree = mreportThree.sumIncome();
-                int expenseThree = mreportThree.sumExpence();
-                
-                int msumIncome = incomeOne + incomeTwo + incomeThree;
-                int msumExpense = expenseOne + expenseTwo + expenseThree;
-                
-                if (yreport.sumExpence() == msumExpense){
-                    System.out.println("Проверка по расходам пройдена")
+    public static void main(String[] args) {
+        System.out.println("Вас приветствует программа бухгалтерской отчетности !");
+        MonthlyReport[] mreport = new MonthlyReport[3];
+        YearlyReport yreport = null;
+        String[] months = {"Январь", "Февраль", "Март"};
+
+        while (true) {
+            printMenu();
+            Scanner scanner = new Scanner(System.in);
+            int userInput = scanner.nextInt();
+
+            if (userInput == 1) {
+                for (int i = 0; i < mreport.length; i++) {
+                    mreport[i] = new MonthlyReport(i, "resources/m.20210" + (i + 1) + ".csv");
                 }
-                else {
-                     System.out.println("Проверка по расходам НЕ пройдена")
+            } else if (userInput == 2) {
+                yreport = new YearlyReport(2021, "resources/y.2021.csv");
+                //вызов метода считывания годового отчета из класса годовых отчетов
+            } else if (userInput == 3) {
+                if(yreport != null && mreport[0]!= null) {
+                    boolean check = true;
+                    for (int i = 0; i < mreport.length; i++) {
+                        if (mreport[i].sumIncome() != yreport.sumIncomeInMonth(i)) {
+                            System.out.println("В месяце " + months[i] + " обнаружено несоответствие по Приходам");
+                            check = false;
+                        }
+                    }
+                    for (int i = 0; i < mreport.length; i++) {
+                        if (mreport[i].sumExpence() != yreport.sumExpenseInMonth(i)) {
+                            System.out.println("В месяце " + months[i] + " обнаружено несоответствие по Расходам");
+                            check = false;
+                        }
+                    }
+                    if (check) {
+                        System.out.println("Операция сверки завершена успешно !");
+                    }
                 }
-                
-                if (yreport.sumIncome() == msumIncome){
-                    System.out.println("Проверка по приходам пройдена")
+                else{
+                    System.out.println("Сверка не возможна, отсутствуют данные по году/месяцам !");
                 }
-                else {
-                     System.out.println("Проверка по приходам НЕ пройдена")
-                }                
-                
-                
-                // вызов метода сверки отчетов
             }
-            else if (userInput == 4){
-                System.out.println("Название месяца: " + mreportOne.month);
-                System.out.println("Самая большая трата: " + mreportOne.maxIncome() + ", " + mreportOne.maxIncomeItem());
-                System.out.println("Самая большая трата: " + mreportOne.maxExpence() + ", " + mreportOne.maxExpenceItem());
-                println();
-                System.out.println("Название месяца: " + mreportTwo.month);
-                System.out.println("Самая большая трата: " + mreportTwo.maxIncome() + ", " + mreportTwo.maxIncomeItem());
-                System.out.println("Самая большая трата: " + mreportTwo.maxExpence() + ", " + mreportTwo.maxExpenceItem());
-                println();
-                System.out.println("Название месяца: " + mreportThree.month);
-                System.out.println("Самая большая трата: " + mreportThree.maxIncome() + ", " + mreportThree.maxIncomeItem());
-                System.out.println("Самая большая трата: " + mreportThree.maxExpence() + ", " + mreportThree.maxExpenceItem());               
-                
-                // вызов метода печати информации из класса месячных очетов
-            }
-            else if (userInput == 5){
-                System.out.println("Рассматриваемый год: " + yreport.year);
-                
-                System.out.println("Прибыль по месяцам: " + (yreport.sumIncomeInMonth(0) - yreport.sumExpenceInMonth(0)));
-                System.out.println("Прибыль по месяцам: " + (yreport.sumIncomeInMonth(1) - yreport.sumExpenceInMonth(1)));
-                System.out.println("Прибыль по месяцам: " + (yreport.sumIncomeInMonth(2) - yreport.sumExpenceInMonth(2)));                
-                
-                System.out.println("Средний расход за все месяцы в году: " + yreport.averageExpence());
-                System.out.println("Средний доход за все месяцы в году: " + yreport.averageIncome());                
-                                
+                    // вызов метода сверки отчетов
+            else if (userInput == 4) {
+                    for (int i = 0; i < mreport.length; i++) {
+                        if (mreport[i] == null) {
+                            System.out.println("Отсутствуют данные по месяцу " + months[i]);
+                        } else {
+                            System.out.println("Название месяца: " + months[i]);
+                            System.out.println("Самый прибыльный товар: " + mreport[i].maxIncomeItem() + ", " + mreport[i].maxIncome());
+                            System.out.println("Самая большая трата: " + mreport[i].maxExpenceItem() + ", " + mreport[i].maxExpence());
+                            System.out.println();
+                        }
+                    }
+                    // вызов метода печати информации из класса месячных очетов
+                }
+            else if (userInput == 5) {
+                    if(yreport != null) {
+                        System.out.println("Рассматриваемый год: " + yreport.year);
+                        for (int i = 0; i < mreport.length; i++) {
+                            System.out.println("Прибыль по месяцу " + months[i] + ": " + (yreport.sumIncomeInMonth(i) - yreport.sumExpenseInMonth(i)));
+                        }
+                        System.out.println("Средний расход за все месяцы в году: " + yreport.averageExpense());
+                        System.out.println("Средний доход за все месяцы в году: " + yreport.averageIncome());
+                    }
+                    else{
+                        System.out.println("Отсутствуют данные по году ");
+                    }
                 // вызов метода печати информации из класса годового отчета
-            }
-            else if (userInput == 123){
-                System.out.println("Пользователь завершил работу с приложением.");
-            }
+                }
+            else if (userInput == 123) {
+                    System.out.println("Пользователь завершил работу с приложением.");
+                    break;
+                }
             else {
-                System.out.println("Такой команды нет, повторите ввод");
+                    System.out.println("Такой команды нет, повторите ввод");
+                }
             }
         }
-    }
-     public void printMenu(){
+
+    public static void printMenu() {
+        System.out.println();
         System.out.println("Выберите нужный пункт меню:");
         System.out.println("1 - Считать все месячные отчёты");
         System.out.println("2 - Считать годовой отчёт");
@@ -91,4 +89,3 @@ public class report {
         System.out.println("5 - Вывести информацию о годовом отчёте");
     }
 }
-
