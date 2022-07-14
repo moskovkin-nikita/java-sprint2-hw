@@ -33,5 +33,93 @@ public class MonthlyReportNew {
         }
     }
   
+      public int sumExpence(){
+        int sum = 0;
+        for (MRecord row : rows) {
+            if(row.isExpense){
+             sum += row.quantity * row.sumOfOne;   
+                }
+            }
+        }
+        return sum;
+    }
   
+      public int sumIncome(){
+        int sum = 0;
+        for (MRecord row : rows) {
+            if(!row.isExpense){
+             sum += row.quantity * row.sumOfOne;   
+                }
+            }
+        }
+        return sum;
+    }
+
+
+
+    public int maxIncome(){
+        int max = 0;
+        for (MRecord row : rows) {
+            if(!row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                }
+            }
+        }
+        return max;
+    }
+
+    public String maxIncomeItem(){
+        int max = 0;
+        String item;
+        for (MRecord row : rows) {
+            if(!row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                    item = row.itemName;
+                }
+            }
+        }
+        return item;
+    }
+
+
+
+
+    public int maxExpence(){
+        int max = 0;
+        for (MRecord row : rows) {
+            if(row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                }
+            }
+        }
+        return max;
+    }
+
+    public int maxExpenceItem(){
+        int max = 0;
+        String item; 
+        for (MRecord row : rows) {
+            if(row.isExpense){
+                if ((row.quantity * row.sumOfOne) > max){
+                    max = row.quantity * row.sumOfOne;
+                    item = row.itemName;
+                }
+            }
+        }
+        return item;
+    }
+
+
+
+
+        public void printMReport {
+        for (MRecord row : rows){
+            System.out.println("Название: "+ row.itemName + ", д/к: " + row.isExpense + ", кол-во: " + row.quantity  + ", цена за ед.: " + row.sumOfOne);        
+        }
+        
+        }
+
   }
