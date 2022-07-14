@@ -22,7 +22,6 @@ public class YearlyReport {
         }
     }
 
-
     public int maxExpence(){
         int max = 0;
         for (YRecord row : rows) {
@@ -86,15 +85,6 @@ public class YearlyReport {
             int average = sum / rowNumber;
             return average;
         }
-
-
-        public void printYReport {
-        for (YRecord row : rows){
-            System.out.println("Месяц: "+ row.month + ", движение средств: " + row.ammount + ", д/к: " + row.isExpense);        
-        }
-        
-        }
-
 
     private String readFileContentsOrNull(String path)
     {
