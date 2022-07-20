@@ -12,12 +12,13 @@ public class MonthlyReport {
     String content = readFileContentsOrNull(path);
     String[] lines = content.split("\r?\n");
     for(int i = 1; i < lines.length; i++){
+
       String line = lines[i];
       String[] parts = line.split(",");
-      String itemName = parts[0];
-      boolean isExpense = Boolean.parseBoolean(parts[1]);
-      int quantity = Integer.parseInt(parts[2]);
-      int sumOfOne = Integer.parseInt(parts[3]);
+      String itemName = parts[0].trim();
+      boolean isExpense = Boolean.parseBoolean(parts[1].trim());
+      int quantity = Integer.parseInt(parts[2].trim());
+      int sumOfOne = Integer.parseInt(parts[3].trim());
       MRecord record = new MRecord(itemName, isExpense, quantity, sumOfOne);
       rows.add(record);
       }      

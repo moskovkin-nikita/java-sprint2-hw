@@ -14,9 +14,9 @@ public class YearlyReport {
         for (int i = 1; i < lines.length; i++) {
             String line = lines[i];
             String[] parts = line.split(",");
-            int month = Integer.parseInt(parts[0]);
-            int ammount = Integer.parseInt(parts[1]);
-            boolean isExpence = Boolean.parseBoolean(parts[2]);
+            int month = Integer.parseInt(parts[0].trim());
+            int ammount = Integer.parseInt(parts[1].trim());
+            boolean isExpence = Boolean.parseBoolean(parts[2].trim());
             YRecord record = new YRecord(month, ammount, isExpence);
             rows.add(record);
         }
